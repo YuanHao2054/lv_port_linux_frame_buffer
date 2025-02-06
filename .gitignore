@@ -57,3 +57,7 @@ dkms.conf
 build/*
 !build/.gitkeep
 !build/compile_commands.json
+
+# 添加GUI GUIDER生成的GUI文件，保留CMakelists.txt
+gui_guider/*
+!gui_guider/CMakeLists.txt

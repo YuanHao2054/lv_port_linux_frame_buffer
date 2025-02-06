@@ -7,8 +7,12 @@
 #include <pthread.h>
 #include <time.h>
 #include <sys/time.h>
+#include "gui_guider/generated/gui_guider.h"
 
 #define DISP_BUF_SIZE (800 * 480)
+
+/*定义GUI GUIDER创建的UI结构体*/
+lv_ui guider_ui;
 
 int main(void)
 {
@@ -54,7 +58,10 @@ int main(void)
 
     /*Create a Demo*/
     //lv_demo_widgets();
-    lv_demo_benchmark();
+    //lv_demo_benchmark();
+
+    /*创建GUI GUIDER生成的UI*/
+    setup_ui(&guider_ui);
 
     /*Handle LitlevGL tasks (tickless mode)*/
     while(1) {

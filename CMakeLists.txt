@@ -1,12 +1,15 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(demo C)
+project(lvgl_demo C)
 
 # 生成 compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # 指定编译器
 set(CMAKE_C_COMPILER "/usr/local/arm/gcc-arm-10.3-2021.07-x86_64-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabihf-gcc")
+
+# 添加lvgl.h的头文件路径
+include_directories(${CMAKE_SOURCE_DIR}/lvgl)
 
 # 设置编译选项
 set(CMAKE_C_FLAGS "-O3 -g0 -Wall -Wshadow -Wundef -Wmissing-prototypes -Wno-discarded-qualifiers \
