@@ -8,8 +8,17 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # 指定编译器
 set(CMAKE_C_COMPILER "/usr/local/arm/gcc-arm-10.3-2021.07-x86_64-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabihf-gcc")
 
-# 添加lvgl.h的头文件路径
+# 添加lvgl.h的头文件路径，主要是GUI_Guider生成的代码需要
 include_directories(${CMAKE_SOURCE_DIR}/lvgl)
+include_directories(${CMAKE_SOURCE_DIR}/lvgl/src)
+include_directories(${CMAKE_SOURCE_DIR}/lvgl/src/font)
+
+# 添加gui_guider.h的头文件路径
+# 如果不使用GUI_Guider，可以注释掉这一行
+include_directories(${CMAKE_SOURCE_DIR}/gui_guider)
+include_directories(${CMAKE_SOURCE_DIR}/gui_guider/custom)
+include_directories(${CMAKE_SOURCE_DIR}/gui_guider/generated)
+
 
 # 设置编译选项
 set(CMAKE_C_FLAGS "-O3 -g0 -Wall -Wshadow -Wundef -Wmissing-prototypes -Wno-discarded-qualifiers \
@@ -31,16 +40,20 @@ include_directories(${LVGL_DIR})
 set(MAIN_SRC "main.c")
 set(LVGL_SRCS)
 set(LV_DRIVERS_SRCS)
+set(GUI_GUIDER_SRCS)
 
-# 递归查找 lvgl 和 lv_drivers 目录下的所有 C 文件
+# 递归查找子目录下的所有 C 文件
 file(GLOB_RECURSE LVGL_SRCS "${LVGL_DIR}/lvgl/*.c")
 file(GLOB_RECURSE LV_DRIVERS_SRCS "${LVGL_DIR}/lv_drivers/*.c")
+file(GLOB_RECURSE GUI_GUIDER_SRCS "${LVGL_DIR}/gui_guider/*.c")
+
 
 # 注释掉编译鼠标输入的源码
 # list(REMOVE_ITEM LV_DRIVERS_SRCS "${LVGL_DIR}/mouse_cursor_icon.c")
 
 # 合并所有源文件
-set(SRCS ${MAIN_SRC} ${LVGL_SRCS} ${LV_DRIVERS_SRCS})
+#set(SRCS ${MAIN_SRC} ${LVGL_SRCS} ${LV_DRIVERS_SRCS})
+set(SRCS ${MAIN_SRC} ${LVGL_SRCS} ${LV_DRIVERS_SRCS} ${GUI_GUIDER_SRCS})
 
 # 生成目标可执行文件
 add_executable(${PROJECT_NAME} ${SRCS})

@@ -60,4 +60,4 @@ build/*
 
 # 添加GUI GUIDER生成的GUI文件，保留CMakelists.txt
 gui_guider/*
-!gui_guider/CMakeLists.txt
+!gui_guider/.gitkeep
